@@ -6,6 +6,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.redmadrobot.inputmask.MaskedTextChangedListener;
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy;
 
@@ -25,18 +27,18 @@ public final class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupPrefixSample();
-        setupSuffixSample();
+       // setupSuffixSample();
     }
 
     private void setupPrefixSample() {
-        final EditText editText = findViewById(R.id.prefix_edit_text);
+        final AppCompatEditText editText = findViewById(R.id.prefix_edit_text);
         final CheckBox checkBox = findViewById(R.id.prefix_check_box);
         final List<String> affineFormats = new ArrayList<>();
-        affineFormats.add("8 ([000]) [000]-[00]-[00]");
+        affineFormats.add("FR[00] [0000] [0000] [0000] [0000] [0000] [000]");
 
         final MaskedTextChangedListener listener = MaskedTextChangedListener.Companion.installOn(
                 editText,
-                "+7 ([000]) [000]-[00]-[00]",
+                "FR[00] [0000] [0000] [0000] [0000] [0000] [000]",
                 affineFormats,
                 AffinityCalculationStrategy.PREFIX,
                 new MaskedTextChangedListener.ValueListener() {
@@ -54,19 +56,14 @@ public final class MainActivity extends AppCompatActivity {
     private void setupSuffixSample() {
         final EditText editText = findViewById(R.id.suffix_edit_text);
         final CheckBox checkBox = findViewById(R.id.suffix_check_box);
-        final List<String> affineFormats = new ArrayList<>();
-        affineFormats.add("+7 ([000]) [000]-[00]-[00]#[000]");
 
         final MaskedTextChangedListener listener = MaskedTextChangedListener.Companion.installOn(
                 editText,
-                "+7 ([000]) [000]-[00]-[00]",
-                affineFormats,
-                AffinityCalculationStrategy.WHOLE_STRING,
+                "TR[00] [0000] [0000] [0000] [0000] [00]",
                 new MaskedTextChangedListener.ValueListener() {
                     @Override
                     public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue, @NonNull String formattedText) {
-                        logValueListener(maskFilled, extractedValue, formattedText);
-                        checkBox.setChecked(maskFilled);
+
                     }
                 }
         );
